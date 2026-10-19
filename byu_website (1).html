@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jundihome — Paket Data Digital</title>
+<style>
+:root{--bg:#f5f5f8;--white:#fff;--text:#202027;--muted:#777784;--primary:#ff4d4f;--orange:#ff8a3d;--yellow:#ffd23f;--line:#e9e9ef;--soft:#fff0e9;--green:#159957}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--text)}
+button,input{font:inherit}
+button{cursor:pointer}
+.topbar{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 6%;position:sticky;top:0;z-index:10}
+.brand{font-size:30px;font-weight:900;letter-spacing:-2px;color:var(--primary)}.brand span{color:var(--yellow)}
+.top-right{display:flex;align-items:center;gap:14px}.user-pill{background:#f5f5f8;padding:10px 15px;border-radius:30px;font-size:13px}
+.layout{max-width:1280px;margin:0 auto;padding:28px 24px;display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px}
+.sidebar{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;height:max-content;position:sticky;top:96px}
+.side-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#999;margin:8px 10px 12px}
+.nav-item{width:100%;display:flex;gap:12px;align-items:center;border:0;background:transparent;padding:13px 12px;border-radius:12px;text-align:left;color:#555560;margin:3px 0;font-weight:600}
+.nav-item:hover,.nav-item.active{background:var(--soft);color:var(--primary)}
+.nav-item .ico{width:24px;text-align:center;font-size:18px}
+main{min-width:0}.page{display:none}.page.active{display:block}
+.page-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;margin-bottom:24px}
+h1{font-size:28px;margin:0 0 7px;letter-spacing:-.7px}h2{font-size:21px;margin:0 0 8px}h3{font-size:16px;margin:0 0 8px}
+.sub{color:var(--muted);font-size:14px;line-height:1.5;margin:0}
+.hero{background:linear-gradient(120deg,var(--primary),var(--orange));border-radius:22px;padding:28px;color:#fff;position:relative;overflow:hidden;margin-bottom:22px}
+.hero:after{content:"";position:absolute;width:220px;height:220px;border:35px solid #ffffff20;border-radius:50%;right:-50px;top:-75px}
+.hero .eyebrow{font-size:13px;opacity:.9}.hero h2{font-size:38px;margin:10px 0}.hero p{margin:0 0 18px;font-size:13px;opacity:.9}
+.btn{border:0;background:var(--primary);color:#fff;border-radius:12px;padding:12px 18px;font-weight:700;transition:.15s}
+.btn:hover{filter:brightness(.95);transform:translateY(-1px)}.btn.white{background:#fff;color:var(--primary)}.btn.outline{background:#fff;border:1px solid var(--primary);color:var(--primary)}.btn.dark{background:#25252c}
+.quick-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:28px}
+.quick{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 12px;text-align:center;cursor:pointer;font-weight:700;font-size:13px}
+.quick:hover{border-color:var(--primary);transform:translateY(-2px)}.quick .qico{width:48px;height:48px;border-radius:15px;background:var(--soft);display:grid;place-items:center;font-size:23px;margin:0 auto 10px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 14px}
+.text-btn{border:0;background:none;color:var(--primary);font-weight:700}
+.package-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.package{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;min-height:215px}
+.package:hover{border-color:#ffaaa9;box-shadow:0 8px 25px #2020270b}
+.tag{display:inline-block;background:var(--yellow);border-radius:6px;padding:5px 8px;font-size:10px;font-weight:800;align-self:flex-start;margin-bottom:12px}
+.package h3{font-size:24px;margin-bottom:5px}.package .duration{color:var(--muted);font-size:13px}.price{font-size:20px;font-weight:800;margin:18px 0}.package .btn{margin-top:auto;width:100%}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:18px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:30px;padding:9px 15px;color:#555;font-size:13px}
+.chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.form-label{display:block;font-size:13px;font-weight:700;margin:14px 0 7px}
+.field{display:block;width:100%;padding:13px 14px;border:1px solid #dddde5;border-radius:11px;outline:none;background:#fff}
+.field:focus{border-color:var(--primary);box-shadow:0 0 0 3px #ff4d4f18}
+.error{color:#d72f2f;font-size:12px;min-height:18px;margin-top:7px}
+.login-wrap{max-width:560px;margin:25px auto}.login-brand{font-size:40px;color:var(--primary);font-weight:900;margin-bottom:14px;letter-spacing:-2px}
+.payment-options{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.payment-option{border:1px solid var(--line);background:#fff;border-radius:13px;padding:17px 10px;text-align:center;font-weight:700}
+.payment-option.active{border:2px solid var(--primary);background:var(--soft);color:var(--primary)}
+.summary-row{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px dashed var(--line);font-size:14px}.summary-row:last-child{border-bottom:0}
+.success{text-align:center;padding:35px 15px}.success-icon{width:80px;height:80px;border-radius:50%;background:#e5f8ed;color:var(--green);display:grid;place-items:center;font-size:42px;margin:0 auto 20px}
+.list-item{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}.list-item:last-child{border-bottom:0}
+.list-icon{width:46px;height:46px;flex:0 0 46px;border-radius:14px;background:var(--soft);display:grid;place-items:center;font-size:21px}
+.list-content{flex:1;min-width:0}.list-content b{display:block;margin-bottom:5px}.list-content p{font-size:13px;color:var(--muted);margin:0;line-height:1.45}
+.status{color:var(--green);font-size:12px;font-weight:700}.promo-card{background:linear-gradient(120deg,#282833,#555563);color:white;border-radius:18px;padding:24px;margin-bottom:15px}.promo-card.orange{background:linear-gradient(120deg,var(--primary),var(--orange))}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);background:#24242b;color:#fff;padding:13px 20px;border-radius:30px;opacity:0;pointer-events:none;transition:.25s;z-index:50;font-size:13px;box-shadow:0 8px 25px #0002}.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;color:#999;font-size:12px;padding:25px}
+@media(max-width:900px){.layout{grid-template-columns:1fr;padding:18px}.sidebar{position:static;display:flex;gap:5px;overflow-x:auto;padding:9px}.side-label{display:none}.nav-item{width:auto;white-space:nowrap;padding:11px}.package-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.topbar{padding:0 20px}}
+@media(max-width:560px){.topbar{height:62px}.brand{font-size:27px}.user-pill{display:none}.layout{padding:14px;gap:15px}.sidebar{border-radius:14px}.nav-item{font-size:12px;padding:10px}.nav-item .ico{font-size:16px;width:auto}.page-heading{align-items:flex-start;flex-direction:column}h1{font-size:24px}.hero{padding:22px}.hero h2{font-size:32px}.quick-grid{grid-template-columns:repeat(4,minmax(65px,1fr));gap:8px}.quick{padding:12px 5px;font-size:11px}.quick .qico{width:40px;height:40px;font-size:20px}.package-grid{grid-template-columns:1fr}.package{min-height:0}.payment-options{grid-template-columns:1fr}.panel{padding:17px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Jundihome</div>
+  <div class="top-right"><span class="user-pill" id="headerGreeting">Semua serba digital</span><button class="btn" id="headerLogin" onclick="showPage('login')">Masuk</button></div>
+</header>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="side-label">Menu utama</div>
+    <button class="nav-item active" data-page="home"><span class="ico">🏠</span>Beranda</button>
+    <button class="nav-item" data-page="packages"><span class="ico">📦</span>Paket Data</button>
+    <button class="nav-item" data-page="promos"><span class="ico">🎁</span>Promo & Voucher</button>
+    <button class="nav-item" data-page="profile"><span class="ico">👤</span>Profil</button>
+    <button class="nav-item" data-page="history"><span class="ico">🧾</span>Riwayat Transaksi</button>
+    <button class="nav-item" data-page="notifications"><span class="ico">🔔</span>Notifikasi</button>
+  </aside>
+  <main>
+    <section class="page active" id="home">
+      <div class="page-heading"><div><h1 id="welcome">Halo, selamat datang! 👋</h1><p class="sub">Atur kebutuhan internet kamu dengan mudah.</p></div><button class="btn" onclick="showPage('packages')">+ Beli Paket</button></div>
+      <div class="hero"><span class="eyebrow">SISA KUOTA KAMU</span><h2>18,6 GB</h2><p>Berlaku sampai 30 Oktober 2026</p><button class="btn white" onclick="showPage('packages')">Tambah Kuota</button></div>
+      <div class="quick-grid">
+        <div class="quick" onclick="showPage('packages')"><div class="qico">📦</div>Beli Paket</div>
+        <div class="quick" onclick="toast('Fitur isi pulsa belum tersedia di prototype ini.')"><div class="qico">💳</div>Isi Pulsa</div>
+        <div class="quick" onclick="showPage('promos')"><div class="qico">🎁</div>Promo</div>
+        <div class="quick" onclick="showPage('promos')"><div class="qico">🎟️</div>Voucher</div>
+      </div>
+      <div class="section-head"><h2>Paket rekomendasi</h2><button class="text-btn" onclick="showPage('packages')">Lihat semua →</button></div>
+      <div class="package-grid" id="homePackages"></div>
+    </section>
+
+    <section class="page" id="login">
+      <div class="login-wrap panel">
+        <div class="login-brand">Jundihome</div>
+        <h1>Selamat datang 👋</h1><p class="sub">Masuk menggunakan nomor telepon dan kode OTP.</p>
+        <form id="loginForm">
+          <label class="form-label" for="phone">Nomor telepon</label><input class="field" id="phone" type="tel" inputmode="numeric" maxlength="13" placeholder="Contoh: 081234567890" autocomplete="off">
+          <label class="form-label" for="otp">Kode OTP</label><input class="field" id="otp" type="text" inputmode="numeric" maxlength="4" placeholder="Masukkan 4 digit OTP" autocomplete="off">
+          <div class="error" id="loginError"></div>
+          <button class="btn" type="submit" style="width:100%">Masuk</button>
+        </form>
+        <p class="sub" style="margin-top:15px">Ini hanya simulasi website. Tidak mengirim OTP sungguhan.</p>
+      </div>
+    </section>
+
+    <section class="page" id="packages">
+      <div class="page-heading"><div><h1>Paket Data</h1><p class="sub">Pilih paket yang sesuai dengan kebutuhanmu.</p></div></div>
+      <div class="panel">
+        <div class="filters" id="filters"><button class="chip active" data-filter="Semua">Semua</button><button class="chip" data-filter="Data">Data</button><button class="chip" data-filter="Streaming">Streaming</button><button class="chip" data-filter="Sosmed">Sosmed</button></div>
+        <div class="package-grid" id="allPackages"></div>
+      </div>
+    </section>
+
+    <section class="page" id="promos">
+      <div class="page-heading"><div><h1>Promo & Voucher 🎁</h1><p class="sub">Manfaatkan penawaran yang tersedia.</p></div></div>
+      <div class="promo-card orange"><span class="tag">PROMO SPESIAL</span><h2>Diskon 20%</h2><p>Paket 25 GB untuk internetan seharian.</p><button class="btn white" onclick="selectPackage(1)">Pakai Promo</button></div>
+      <div class="panel">
+        <div class="list-item"><div class="list-icon">🎉</div><div class="list-content"><b>Bonus 5 GB</b><p>Beli paket 50 GB dan dapatkan bonus kuota.</p></div><button class="btn outline" onclick="selectPackage(2)">Pakai</button></div>
+        <div class="list-item"><div class="list-icon">💸</div><div class="list-content"><b>Cashback 10%</b><p>Promo simulasi untuk pembayaran digital.</p></div><button class="btn outline" onclick="selectPackage(1)">Pakai</button></div>
+        <div class="list-item"><div class="list-icon">🎟️</div><div class="list-content"><b>Voucher JUNDIHEMAT</b><p>Gunakan kode voucher pada prototype ini.</p></div><button class="btn outline" onclick="copyVoucher()">Salin Kode</button></div>
+      </div>
+    </section>
+
+    <section class="page" id="profile">
+      <div class="page-heading"><div><h1>Profil Saya</h1><p class="sub">Informasi akun dan pengaturan.</p></div></div>
+      <div class="panel">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px"><div class="list-icon" style="width:66px;height:66px;font-size:30px;border-radius:50%">👤</div><div><h2 id="profileName">Ravael Juandeta</h2><p class="sub" id="profilePhone">Nomor telepon belum diisi</p></div></div>
+        <div class="list-item"><div class="list-icon">✏️</div><div class="list-content"><b>Ubah Data Diri</b><p>Fitur pengubahan data belum tersedia.</p></div><button class="btn outline" onclick="toast('Fitur ubah data diri belum tersedia.')">Buka</button></div>
+        <div class="list-item"><div class="list-icon">🧾</div><div class="list-content"><b>Riwayat Transaksi</b><p>Lihat transaksi paket yang sudah dilakukan.</p></div><button class="btn outline" onclick="showPage('history')">Lihat</button></div>
+        <div class="list-item"><div class="list-icon">🔔</div><div class="list-content"><b>Notifikasi</b><p>Informasi kuota dan promo terbaru.</p></div><button class="btn outline" onclick="showPage('notifications')">Lihat</button></div>
+        <button class="btn outline" style="margin-top:20px" onclick="logout()">Keluar</button>
+      </div>
+    </section>
+
+    <section class="page" id="checkout">
+      <div class="page-heading"><div><h1>Detail Paket</h1><p class="sub">Periksa paket sebelum melanjutkan pembayaran.</p></div></div>
+      <div class="panel">
+        <div style="display:flex;justify-content:space-between;gap:15px;align-items:flex-start"><div><span class="tag">PAKET PILIHAN</span><h2 id="checkoutName">Paket 25 GB</h2><p class="sub" id="checkoutDuration">30 hari</p></div><div style="font-size:23px;font-weight:800" id="checkoutPrice">Rp 50.000</div></div>
+        <div style="margin-top:18px"><div class="summary-row"><span>Kuota</span><b id="checkoutQuota">25 GB</b></div><div class="summary-row"><span>Masa aktif</span><b id="checkoutDays">30 hari</b></div><div class="summary-row"><span>Total pembayaran</span><b id="checkoutTotal">Rp 50.000</b></div></div>
+      </div>
+      <div class="panel"><h2>Metode Pembayaran</h2><p class="sub">Pilih salah satu metode berikut.</p>
+        <div class="payment-options"><button class="payment-option active" data-method="Pulsa">💳<br><br>Pulsa</button><button class="payment-option" data-method="OVO / GoPay">🟣<br><br>OVO / GoPay</button><button class="payment-option" data-method="DANA">🔵<br><br>DANA</button></div>
+        <button class="btn" style="width:100%;margin-top:22px" id="payBtn">Bayar Sekarang</button>
+      </div>
+      <button class="text-btn" onclick="showPage('packages')">← Kembali ke paket</button>
+    </section>
+
+    <section class="page" id="success">
+      <div class="panel success"><div class="success-icon">✓</div><h1>Pembelian Berhasil!</h1><p class="sub">Ini adalah simulasi transaksi. Tidak ada pembayaran sungguhan.</p>
+        <div class="panel" style="text-align:left;margin-top:25px"><div class="summary-row"><span>Paket</span><b id="successPackage">25 GB / 30 hari</b></div><div class="summary-row"><span>Total</span><b id="successPrice">Rp 50.000</b></div><div class="summary-row"><span>Metode</span><b id="successMethod">Pulsa</b></div><div class="summary-row"><span>ID Transaksi</span><b id="successId">#BYU20261019</b></div></div>
+        <button class="btn" onclick="showPage('home')">Kembali ke Beranda</button> <button class="btn outline" onclick="showPage('history')">Riwayat Transaksi</button>
+      </div>
+    </section>
+
+    <section class="page" id="history">
+      <div class="page-heading"><div><h1>Riwayat Transaksi</h1><p class="sub">Daftar pembelian paket kamu.</p></div></div>
+      <div class="panel" id="historyList"></div>
+    </section>
+
+    <section class="page" id="notifications">
+      <div class="page-heading"><div><h1>Notifikasi</h1><p class="sub">Informasi terbaru untuk kamu.</p></div></div>
+      <div class="panel">
+        <div class="list-item"><div class="list-icon">📶</div><div class="list-content"><b>Kuota masih tersedia</b><p>Sisa kuota kamu 18,6 GB. Beli paket lagi kapan saja.</p></div><span class="status">Info</span></div>
+        <div class="list-item" onclick="showPage('promos')" style="cursor:pointer"><div class="list-icon">🎁</div><div class="list-content"><b>Diskon 20%</b><p>Lihat promo paket data yang tersedia.</p></div><span class="status">Promo</span></div>
+        <div class="list-item" onclick="showPage('history')" style="cursor:pointer"><div class="list-icon">🧾</div><div class="list-content"><b>Riwayat transaksi</b><p>Transaksi yang kamu lakukan akan muncul di halaman riwayat.</p></div><span class="status">Info</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+<footer>Prototype pembelajaran — terinspirasi dari aplikasi paket data digital. Bukan situs resmi by.U.</footer>
+<div class="toast" id="toast"></div>
+<script>
+const packages=[
+ {name:'Paket 10 GB',quota:'10 GB',days:15,price:30000,category:'Data',tag:'HEMAT'},
+ {name:'Paket 25 GB',quota:'25 GB',days:30,price:50000,category:'Data',tag:'POPULER'},
+ {name:'Paket 50 GB',quota:'50 GB',days:30,price:85000,category:'Data',tag:'BESAR'},
+ {name:'Unlimited Sosmed',quota:'Sosmed',days:30,price:40000,category:'Sosmed',tag:'SOSMED'},
+ {name:'Streaming 20 GB',quota:'20 GB',days:30,price:45000,category:'Streaming',tag:'STREAMING'}
+];
+let selectedPackage=1,selectedMethod='Pulsa',transactions=[];
+const money=n=>'Rp '+n.toLocaleString('id-ID');
+function packageCard(p,i){return `<article class="package"><span class="tag">${p.tag}</span><h3>${p.name}</h3><div class="duration">${p.days} hari · ${p.category}</div><div class="price">${money(p.price)}</div><button class="btn" onclick="selectPackage(${i})">Pilih Paket</button></article>`}
+function renderPackages(){document.getElementById('homePackages').innerHTML=[packages[1],packages[2],packages[0]].map(p=>packageCard(p,packages.indexOf(p))).join('');document.getElementById('allPackages').innerHTML=packages.map((p,i)=>packageCard(p,i)).join('')}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='history')renderHistory()}
+document.querySelectorAll('.nav-item').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('[data-filter]');if(!b)return;document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c===b));const f=b.dataset.filter;document.querySelectorAll('#allPackages .package').forEach((el,i)=>{el.style.display=(f==='Semua'||packages[i].category===f)?'flex':'none'})});
+function selectPackage(i){selectedPackage=i;const p=packages[i];document.getElementById('checkoutName').textContent=p.name;document.getElementById('checkoutDuration').textContent=p.days+' hari';document.getElementById('checkoutPrice').textContent=money(p.price);document.getElementById('checkoutQuota').textContent=p.quota;document.getElementById('checkoutDays').textContent=p.days+' hari';document.getElementById('checkoutTotal').textContent=money(p.price);showPage('checkout')}
+document.querySelectorAll('.payment-option').forEach(b=>b.addEventListener('click',()=>{selectedMethod=b.dataset.method;document.querySelectorAll('.payment-option').forEach(x=>x.classList.toggle('active',x===b))}));
+document.getElementById('payBtn').addEventListener('click',()=>{const p=packages[selectedPackage];const tx={name:p.name,price:p.price,days:p.days,method:selectedMethod,date:new Date().toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'}),id:'#BYU'+Date.now().toString().slice(-8)};transactions.unshift(tx);document.getElementById('successPackage').textContent=p.name+' / '+p.days+' hari';document.getElementById('successPrice').textContent=money(p.price);document.getElementById('successMethod').textContent=selectedMethod;document.getElementById('successId').textContent=tx.id;showPage('success');toast('Transaksi simulasi berhasil!')});
+function renderHistory(){const el=document.getElementById('historyList');if(!transactions.length){el.innerHTML='<p class="sub">Belum ada transaksi di sesi ini. Coba pilih paket dan lakukan simulasi pembayaran.</p>';return}el.innerHTML=transactions.map(t=>`<div class="list-item"><div class="list-icon">🧾</div><div class="list-content"><b>${t.name}</b><p>${t.date} · ${t.method} · ${t.id}</p></div><div style="text-align:right"><b>${money(t.price)}</b><div class="status">Berhasil</div></div></div>`).join('')}
+document.getElementById('loginForm').addEventListener('submit',e=>{e.preventDefault();const phone=document.getElementById('phone'),otp=document.getElementById('otp'),err=document.getElementById('loginError');phone.value=phone.value.replace(/\D/g,'');otp.value=otp.value.replace(/\D/g,'');err.textContent='';if(phone.value.length<10||phone.value.length>13){err.textContent='Masukkan nomor telepon yang terdiri dari 10–13 digit.';phone.focus();return}if(otp.value.length!==4){err.textContent='Kode OTP harus terdiri dari 4 digit.';otp.focus();return}document.getElementById('profilePhone').textContent=phone.value;document.getElementById('headerGreeting').textContent='Halo, Ravael 👋';document.getElementById('headerLogin').textContent='Profil';document.getElementById('headerLogin').onclick=()=>showPage('profile');document.getElementById('welcome').textContent='Halo, Ravael 👋';showPage('home');toast('Berhasil masuk ke prototype!')});
+['phone','otp'].forEach(id=>document.getElementById(id).addEventListener('input',e=>e.target.value=e.target.value.replace(/\D/g,'')));
+function logout(){document.getElementById('headerGreeting').textContent='Semua serba digital';document.getElementById('headerLogin').textContent='Masuk';document.getElementById('headerLogin').onclick=()=>showPage('login');showPage('login');toast('Kamu sudah keluar dari sesi prototype.')}
+function copyVoucher(){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText('JUNDIHEMAT').then(()=>toast('Kode JUNDIHEMAT disalin.')).catch(()=>toast('Kode voucher: JUNDIHEMAT'))}else toast('Kode voucher: JUNDIHEMAT')}
+let toastTimer;function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2300)}
+renderPackages();renderHistory();
+</script>
+</body>
+</html>
